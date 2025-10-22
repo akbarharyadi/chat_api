@@ -30,6 +30,15 @@ docker compose run --rm web bash -lc "bundle exec rspec -fd"
 ### API Contract Hints
 
 - Swagger UI: visit `http://localhost:3000/docs` to browse the live documentation powered by `docs/openapi.yaml`.
+- Frontend integration guide: see `docs/frontend_integration.md` for REST/WebSocket usage examples.
+
+## Frontend Integration
+
+Reference `docs/frontend_integration.md` for:
+
+- Sample REST requests (list/create chatrooms, post messages).
+- Action Cable subscription example code for JavaScript clients.
+- Recommendations for handling validation errors and stable user identifiers.
 
 ## 👥 Authors
 

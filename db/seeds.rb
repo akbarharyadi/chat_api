@@ -5,8 +5,8 @@ general = Chatroom.find_or_create_by!(name: "General")
 
 [
   { user_uid: "system", user_name: "System", body: "Welcome to the General chatroom!" },
-  { user_uid: "alice-uuid", user_name: "Alice", body: "Hi there, excited to test Action Cable." },
-  { user_uid: "bob-uuid", user_name: "Bob", body: "Same here-messaging looks good already." }
+  { user_uid: "akbar-uuid", user_name: "Akbar", body: "Hi there, excited to test application." },
+  { user_uid: "haryadi-uuid", user_name: "Haryadi", body: "Okay." }
 ].each do |attrs|
   general.messages.find_or_create_by!(attrs)
 end
