@@ -1,24 +1,32 @@
-# README
+# Chat API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API-only Rails application that exposes chatrooms, persists messages, and pushes
+real-time updates over Action Cable.
 
-Things you may want to cover:
+## Local Development
 
-* Ruby version
+```
+docker compose up --build
+```
 
-* System dependencies
+Services:
 
-* Configuration
+- `web`: Rails API at `http://localhost:3000`
+- `db`: Postgres 16
+- `redis`: Redis 7 (Action Cable backend)
 
-* Database creation
+After the stack is up, seed sample data:
 
-* Database initialization
+```
+docker compose run --rm web bundle exec rails db:seed
+```
 
-* How to run the test suite
+Run the test suite:
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+docker compose run --rm web bash -lc "bundle exec rspec -fd"
+```
 
-* Deployment instructions
+### API Contract Hints
 
-* ...
+- Swagger UI: visit `http://localhost:3000/docs` to browse the live documentation powered by `docs/openapi.yaml`.
