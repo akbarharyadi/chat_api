@@ -16,6 +16,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: chat_api_development
       REDIS_URL: redis://redis:6379/1
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY:-83cd282156e94e802544e07841d6892d}
     volumes:
       - .:/rails
       - bundle:/usr/local/bundle
