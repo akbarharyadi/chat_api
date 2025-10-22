@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => "/cable"
 
+  resources :chatrooms, only: %i[index show create] do
+    resources :messages, only: :create
+  end
+
   # Defines the root path route ("/")
   # root "posts#index"
 end

@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :chatroom do
-    name { "MyString" }
+    sequence(:name) { |n| "Chatroom #{n}" }
   end
 end
