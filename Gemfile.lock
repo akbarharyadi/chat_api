@@ -134,6 +134,8 @@ GEM
     parser (3.3.9.0)
       ast (~> 2.4.1)
       racc
+    pg (1.6.2-x64-mingw-ucrt)
+    pg (1.6.2-x86_64-linux)
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
@@ -220,8 +222,6 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
-    sqlite3 (2.7.4-x64-mingw-ucrt)
-    sqlite3 (2.7.4-x86_64-linux-gnu)
     stringio (3.1.7)
     thor (1.4.0)
     timeout (0.4.3)
@@ -248,10 +248,10 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  pg (~> 1.5)
   puma (>= 5.0)
   rails (~> 7.2.2, >= 7.2.2.2)
   rubocop-rails-omakase
-  sqlite3 (>= 1.4)
   tzinfo-data
 
 BUNDLED WITH
