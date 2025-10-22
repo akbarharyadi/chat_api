@@ -1,0 +1,175 @@
+openapi: 3.0.3
+info:
+  title: Chat API
+  version: "1.0.0"
+  description: |
+    Chat API application with features for chatrooms and messages.
+servers:
+  - url: http://localhost:3000
+paths:
+  /chatrooms:
+    get:
+      tags: [Chatrooms]
+      summary: List chatrooms
+      responses:
+        "200":
+          description: A list of chatrooms.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Chatroom"
+              examples:
+                default:
+                  value:
+                    - id: 1
+                      name: General
+                      created_at: "2025-10-22T11:39:01Z"
+                      updated_at: "2025-10-22T11:39:01Z"
+    post:
+      tags: [Chatrooms]
+      summary: Create a chatroom
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewChatroom"
+            examples:
+              default:
+                value:
+                  chatroom:
+                    name: Developers
+      responses:
+        "201":
+          description: Chatroom created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chatroom"
+        "422":
+          description: Validation errors.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /chatrooms/{id}:
+    get:
+      tags: [Chatrooms]
+      summary: Retrieve a chatroom
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Chatroom payload.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chatroom"
+        "404":
+          description: Chatroom not found.
+  /chatrooms/{chatroom_id}/messages:
+    post:
+      tags: [Messages]
+      summary: Create a message in a chatroom
+      parameters:
+        - name: chatroom_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewMessage"
+            examples:
+              default:
+                value:
+                  message:
+                    body: "Hello!"
+                    user_name: "Alice"
+                    user_uid: "7c1de6ff-1b5b-4c59-8c7e-4e08c2eac7bd"
+      responses:
+        "201":
+          description: Message created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "422":
+          description: Validation errors.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    Chatroom:
+      type: object
+      required: [id, name, created_at, updated_at]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    NewChatroom:
+      type: object
+      required: [chatroom]
+      properties:
+        chatroom:
+          type: object
+          required: [name]
+          properties:
+            name:
+              type: string
+    Message:
+      type: object
+      required: [id, chatroom_id, body, user_name, user_uid, created_at]
+      properties:
+        id:
+          type: integer
+        chatroom_id:
+          type: integer
+        body:
+          type: string
+        user_name:
+          type: string
+        user_uid:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    NewMessage:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: object
+          required: [body, user_name, user_uid]
+          properties:
+            body:
+              type: string
+            user_name:
+              type: string
+            user_uid:
+              type: string
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string

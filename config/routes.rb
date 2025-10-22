@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => "/cable"
 
+  get "/openapi.yaml" => "docs#openapi"
+  get "/docs" => "docs#swagger"
+
   resources :chatrooms, only: %i[index show create] do
     resources :messages, only: :create
   end
