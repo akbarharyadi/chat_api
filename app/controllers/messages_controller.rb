@@ -1,4 +1,11 @@
 class MessagesController < ApplicationController
+  def index
+    chatroom = Chatroom.find(params[:chatroom_id])
+    messages = chatroom.messages.order(created_at: :asc)
+
+    render json: messages.map { MessageSerializer.new(_1).as_json }
+  end
+
   def create
     chatroom = Chatroom.find(params[:chatroom_id])
     message = chatroom.messages.new(message_params)

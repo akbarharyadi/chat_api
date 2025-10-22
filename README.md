@@ -40,6 +40,11 @@ Reference `docs/frontend_integration.md` for:
 - Action Cable subscription example code for JavaScript clients.
 - Recommendations for handling validation errors and stable user identifiers.
 
+### CORS Configuration
+
+- Default allowed origins: `http://localhost:5173` and `http://localhost:3000`.
+- Override by setting `CORS_ORIGINS` (space-separated list) before starting the server or containers.
+
 ## 👥 Authors
 
 - **Akbar Haryadi** - *Initial work* - [github.com/akbarharyadi](https://github.com/akbarharyadi)

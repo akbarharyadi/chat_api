@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "/docs" => "docs#swagger"
 
   resources :chatrooms, only: %i[index show create] do
-    resources :messages, only: :create
+    resources :messages, only: %i[index create]
   end
 
   # Defines the root path route ("/")

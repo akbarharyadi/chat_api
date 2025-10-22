@@ -1,8 +1,25 @@
 require "rails_helper"
 
 RSpec.describe "Messages API", type: :request do
+  before { host! "localhost" }
+
+  describe "GET /chatrooms/:chatroom_id/messages" do
+    it "returns ordered messages for the chatroom" do
+      chatroom = create(:chatroom)
+      older = create(:message, chatroom:, created_at: 2.minutes.ago)
+      newer = create(:message, chatroom:, created_at: 1.minute.ago)
+
+      get chatroom_messages_path(chatroom), as: :json
+
+      expect(response).to have_http_status(:ok)
+      json = JSON.parse(response.body)
+      expect(json.size).to eq(2)
+      expect(json.first["id"]).to eq(older.id)
+      expect(json.last["id"]).to eq(newer.id)
+    end
+  end
+
   describe "POST /chatrooms/:chatroom_id/messages" do
-    before { host! "localhost" }
 
     let(:chatroom) { create(:chatroom) }
     it "persists and returns a message payload" do
