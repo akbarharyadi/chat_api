@@ -30,3 +30,7 @@ docker compose run --rm web bash -lc "bundle exec rspec -fd"
 ### API Contract Hints
 
 - Swagger UI: visit `http://localhost:3000/docs` to browse the live documentation powered by `docs/openapi.yaml`.
+
+## 👥 Authors
+
+- **Akbar Haryadi** - *Initial work* - [github.com/akbarharyadi](https://github.com/akbarharyadi)
