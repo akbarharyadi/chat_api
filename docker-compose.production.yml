@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   web:
-    image: ${CHAT_API_IMAGE:-ghcr.io/example/chat_api:latest}
+    image: ${CHAT_API_IMAGE}
     env_file:
       - .env.production
     ports:
