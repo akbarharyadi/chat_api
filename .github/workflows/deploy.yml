@@ -65,18 +65,18 @@ jobs:
             mkdir -p /opt/chat-api
             cd /opt/chat-api
 
-            cat <<'EOF' > .env.production
-RAILS_ENV=production
-RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
-CORS_ORIGINS=${{ secrets.CORS_ORIGINS }}
-POSTGRES_USER=${{ secrets.POSTGRES_USER }}
-POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-POSTGRES_DB=${{ secrets.POSTGRES_DB }}
-POSTGRES_HOST=db
-POSTGRES_PORT=5432
-REDIS_URL=redis://redis:6379/1
-CHAT_API_IMAGE=${IMAGE}
-EOF
+            {
+              printf '%s\n' "RAILS_ENV=production"
+              printf '%s\n' "RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}"
+              printf '%s\n' "CORS_ORIGINS=${{ secrets.CORS_ORIGINS }}"
+              printf '%s\n' "POSTGRES_USER=${{ secrets.POSTGRES_USER }}"
+              printf '%s\n' "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}"
+              printf '%s\n' "POSTGRES_DB=${{ secrets.POSTGRES_DB }}"
+              printf '%s\n' "POSTGRES_HOST=db"
+              printf '%s\n' "POSTGRES_PORT=5432"
+              printf '%s\n' "REDIS_URL=redis://redis:6379/1"
+              printf '%s\n' "CHAT_API_IMAGE=${IMAGE}"
+            } > .env.production
 
             docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" -p "${{ secrets.GHCR_TOKEN }}"
             docker compose -f docker-compose.production.yml pull
