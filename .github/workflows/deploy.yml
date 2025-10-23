@@ -64,7 +64,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             set -euo pipefail
-            IMAGE="${{ needs.build-and-push.outputs.image }}"
+            IMAGE="ghcr.io/$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')"
             mkdir -p /opt/chat-api
             cd /opt/chat-api
 
@@ -78,7 +78,7 @@ jobs:
               printf '%s\n' "POSTGRES_HOST=db"
               printf '%s\n' "POSTGRES_PORT=5432"
               printf '%s\n' "REDIS_URL=redis://redis:6379/1"
-              printf '%s\n' "CHAT_API_IMAGE=${IMAGE}"
+              printf '%s\n' "CHAT_API_IMAGE=${IMAGE}:latest"
             } > .env.production
 
             docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" -p "${{ secrets.GHCR_TOKEN }}"
