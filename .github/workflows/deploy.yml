@@ -44,6 +44,9 @@ jobs:
     needs: build-and-push
     if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch' }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Copy docker-compose.production.yml
         uses: appleboy/scp-action@v0.1.7
         with:
