@@ -1,11 +1,10 @@
 # Chat API
 
-API-only Rails application that exposes chatrooms, persists messages, and pushes
-real-time updates over Action Cable.
+API-only Rails application that exposes chatrooms, persists messages, and pushes real-time updates over Action Cable.
 
 ## Local Development
 
-```
+```bash
 docker compose up --build
 ```
 
@@ -17,13 +16,13 @@ Services:
 
 After the stack is up, seed sample data:
 
-```
+```bash
 docker compose run --rm web bundle exec rails db:seed
 ```
 
 Run the test suite:
 
-```
+```bash
 docker compose run --rm web bash -lc "bundle exec rspec -fd"
 ```
 
@@ -31,6 +30,7 @@ docker compose run --rm web bash -lc "bundle exec rspec -fd"
 
 - Swagger UI: visit `http://localhost:3000/docs` to browse the live documentation powered by `docs/openapi.yaml`.
 - Frontend integration guide: see `docs/frontend_integration.md` for REST/WebSocket usage examples.
+- Deployment reference: see `docs/deployment_ubuntu.md` for GitHub Actions-driven rollout steps.
 
 ## Frontend Integration
 
@@ -45,6 +45,12 @@ Reference `docs/frontend_integration.md` for:
 - Default allowed origins: `http://localhost:5173` and `http://localhost:3000`.
 - Override by setting `CORS_ORIGINS` (space-separated list) before starting the server or containers.
 
-## 👥 Authors
+## Deployment
 
-- **Akbar Haryadi** - *Initial work* - [github.com/akbarharyadi](https://github.com/akbarharyadi)
+- Automated CI: `.github/workflows/ci.yml`
+- Automated deploy: `.github/workflows/deploy.yml`
+- Detailed server setup: `docs/deployment_ubuntu.md`
+
+## Authors
+
+- **Akbar Haryadi** — [github.com/akbarharyadi](https://github.com/akbarharyadi)
