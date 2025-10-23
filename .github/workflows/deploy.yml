@@ -95,6 +95,8 @@ jobs:
               printf '%s\n' "CHAT_API_IMAGE=${IMAGE_BASE}:latest"
             } > .env.production
 
+            export CHAT_API_IMAGE="${IMAGE_BASE}:latest"
+
             docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" -p "${{ secrets.GHCR_TOKEN }}"
             docker compose -f docker-compose.production.yml pull
             docker compose -f docker-compose.production.yml up -d --remove-orphans
