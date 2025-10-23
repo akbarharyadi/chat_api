@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => "/cable"
 
-  get "/openapi.yaml" => "docs#openapi"
+  get "/docs/openapi.yaml" => "docs#openapi"
   get "/docs" => "docs#swagger"
-
+  root to: redirect("/docs")
   resources :chatrooms, only: %i[index show create] do
     resources :messages, only: %i[index create]
   end
