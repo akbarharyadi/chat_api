@@ -15,7 +15,7 @@ jobs:
       image: ${{ steps.vars.outputs.image }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Compute image name
         id: vars
@@ -52,7 +52,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Copy docker-compose.production.yml
         uses: appleboy/scp-action@v0.1.7
